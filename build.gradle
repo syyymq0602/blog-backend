@@ -1,0 +1,174 @@
+description 'Blog'
+
+buildscript {
+    //统一版本管理
+    ext {
+        springBootVersion = '2.3.12.RELEASE'
+    }
+    //仓库
+    repositories {
+        mavenLocal()
+        maven{ url 'https://maven.aliyun.com/nexus/content/groups/public/'}
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+ext['docker.base.image'] = 'openjdk:8-jre-alpine'
+ext['docker.maintainer'] = 'admin@ipark.com'
+
+//ext['ipark.grpc.api.version'] = '2.0.2'
+ext['kafka.version'] = '2.0.0'
+ext['mqtt-client.version'] = '1.15'
+ext['zookeeper.version'] = '3.4.8'
+ext['curator.version'] = '2.12.0'
+ext['hazelcast.version'] = '3.9.3'
+//ext['protobuf.version'] = '3.5.1'
+ext['grpc.version'] = '1.55.1'
+ext['guava.version'] = '27.1-jre'
+ext['netty.version'] = '4.1.27.Final'
+//ext['groovy.version'] = '2.4.12'
+ext['mongodb.version'] = '3.12.7'
+ext['solr.version'] = '6.4.0'
+ext['siddhi.version'] = '3.1.2'
+ext['jasperreports.version'] = '6.11.0'
+ext['hutool.version'] = '5.4.7'
+ext['jjwt.version'] = '0.9.1'
+ext['nimbus-jose-jwt.version.version'] = '8.23'
+ext['knife4j.version'] = '3.0.1'
+ext['swagger.version'] = '2.1.5'
+ext['springfox-boot-starter.version'] = '3.0.0'
+ext['springCloudVersion'] = 'Hoxton.SR8'
+ext['springCloudAlibabaVersion'] = '2.2.6.RELEASE'
+ext['log4j2.version'] = '2.17.0'
+ext['harboraddress'] = '10.4.4.113'
+ext['jackson.version'] = '2.11.3'
+ext['joda.version'] = '2.10.2'
+
+//全局配置
+allprojects {
+    group 'org.kooguy.work'
+    version '0.0.1'
+    apply plugin: 'jacoco'
+    apply plugin: 'idea'
+    apply plugin: "java"
+//    apply plugin: "org.springframework.boot"
+    apply plugin: "io.spring.dependency-management"
+    //java版本
+    sourceCompatibility = 11
+    targetCompatibility = 11
+    //编码
+    tasks.withType(JavaCompile){
+        options.encoding ="UTF-8"
+    }
+    repositories {
+        mavenLocal()
+        maven{ url 'https://maven.aliyun.com/nexus/content/groups/public/'}
+        mavenCentral()
+    }
+}
+
+//配置子项目
+subprojects {
+    group 'org.kooguy.work'
+    version '1.0'
+    apply plugin: 'jacoco'
+    apply plugin: 'idea'
+    apply plugin: "java"
+//    apply plugin: "org.springframework.boot"
+    apply plugin: "io.spring.dependency-management"
+    //java版本
+    sourceCompatibility = 11
+    targetCompatibility = 11
+    //编码
+    tasks.withType(JavaCompile){
+        options.encoding ="UTF-8"
+    }
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.boot:spring-boot-dependencies:$springBootVersion"
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+            mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:${springCloudAlibabaVersion}"
+        }
+
+    }
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+        implementation("org.springframework.boot:spring-boot-starter-websocket")
+        implementation("org.springframework.boot:spring-boot-starter-actuator")
+        implementation('org.springframework.boot:spring-boot-starter-data-redis')
+
+        implementation group: 'junit', name: 'junit'
+        annotationProcessor('org.projectlombok:lombok:1.18.8')
+        implementation('org.projectlombok:lombok:1.18.8')
+        testAnnotationProcessor('org.projectlombok:lombok:1.18.8')
+        implementation('org.projectlombok:lombok:1.18.8')
+        implementation ('org.springframework.boot:spring-boot-starter-security')
+
+        // Date/time conversions.
+        implementation group: 'joda-time', name: 'joda-time', version: '2.10.2'
+
+        //hibernate-validator
+        implementation group: 'org.hibernate', name: 'hibernate-validator', version: '6.0.16.Final'
+        //
+        implementation group: 'org.springframework', name: 'spring-context'
+        //
+        implementation group: 'com.google.guava', name: 'guava', version: "${rootProject.ext['guava.version']}"
+        //validation
+        implementation ('org.springframework.boot:spring-boot-starter-validation')
+        //swagger models
+        implementation group: 'io.swagger', name: 'swagger-models', version: '1.6.0'
+        // JSON web token support.
+        implementation group: 'io.jsonwebtoken', name: 'jjwt', version:'0.7.0'
+
+        implementation group: 'org.yaml', name: 'snakeyaml'
+        implementation group: 'org.json', name: 'json', version: '20180813'
+
+        implementation group: 'commons-lang', name: 'commons-lang', version: '2.6'
+        implementation group: 'commons-collections', name: 'commons-collections', version: '3.2.2'
+        implementation group: 'commons-io', name: 'commons-io', version: '2.6'
+        implementation group: 'io.springfox', name: 'springfox-boot-starter', version: "${rootProject.ext['springfox-boot-starter.version']}"
+        implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: "${rootProject.ext['springfox-boot-starter.version']}"
+
+        implementation group: 'io.swagger.core.v3', name: 'swagger-annotations', version: '2.1.11'
+        implementation group: 'io.swagger.core.v3', name: 'swagger-models', version: '2.1.11'
+        implementation group: 'io.swagger.core.v3', name: 'swagger-core', version: '2.1.11'
+
+
+        implementation group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+
+
+        //hutool
+        implementation("cn.hutool:hutool-all:${rootProject.ext['hutool.version']}")
+
+        //poi
+        implementation group: 'org.apache.poi', name: 'poi', version: '3.16'
+        //poi-xlsx
+        implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '3.16'
+
+        implementation ("com.github.xiaoymin:knife4j-spring-boot-starter:${rootProject.ext['knife4j.version']}")
+
+        // SLF4J Extension for i18n
+        implementation group: 'org.slf4j', name: 'slf4j-ext', version: '1.7.25'
+        implementation group: 'ch.qos.cal10n', name: 'cal10n-api', version: '0.7.7'
+        configurations {
+            all {
+                exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+            }
+            implementationOnly {
+                extendsFrom annotationProcessor
+            }
+        }
+    }
+//    jacocoTestReport {
+//        reports {
+//            xml.enabled false
+//            html.enabled true
+//        }
+//    }
+    check.dependsOn jacocoTestReport
+}
+

@@ -1,0 +1,56 @@
+description "Blog Web Rest Application"
+
+//apply plugin: 'org.springframework.boot'
+//apply plugin: 'com.palantir.docker'
+
+dependencies {
+    //spring cloud oauth2
+//    implementation ('org.springframework.cloud:spring-cloud-starter-oauth2')
+//    implementation ('org.springframework.cloud:spring-cloud-starter-security')
+    // OAuth2 认证服务器
+    implementation ('org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure')
+    implementation ('org.springframework.security:spring-security-oauth2-jose')
+    implementation ('org.springframework.security:spring-security-config')
+    implementation ('org.springframework.security:spring-security-oauth2-resource-server')
+//    implementation group:'org.springframework.security',name:'spring-security-oauth2-client',version:'5.3.9.RELEASE'
+    //jwt
+    implementation ("com.nimbusds:nimbus-jose-jwt")
+
+//    implementation project(path: ':platform-core')
+//    implementation project(path: ':platform-core-api')
+//    implementation project(path: ':platform-model')
+//    implementation project(':platform-orm')
+//    implementation project(path: ':service-avas-management')
+//    implementation project(path: ':service-externaldata-management')
+//    implementation project(path: ':service-infrastructure-management')
+//    implementation project(path: ':service-user-management')
+//    implementation('org.springframework.boot:spring-boot-starter-web')
+//    implementation('org.springframework.boot:spring-boot-devtools')
+//    implementation('org.springframework.boot:spring-boot-starter-actuator')
+
+
+}
+
+//skip Test tasks
+
+gradle.taskGraph.whenReady {
+    tasks.each { task ->
+        if (task.name.contains("test"))
+        {
+            task.enabled = false
+        }
+    }
+}
+
+def getGitVersion() {
+    return 'git rev-parse --short HEAD'.execute().text.trim()
+}
+
+ext['gitCommitId'] = getGitVersion()
+//ext['containerImageName'] = "${project.harboraddress}/${project.group}/${bootJar.baseName}:${gitCommitId}"
+
+tasks.register('containerImageInfo') {
+    doLast {
+        println "${project.harboraddress}/${project.group}/${bootJar.baseName}:${gitCommitId}"
+    }
+}
