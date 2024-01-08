@@ -9,8 +9,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 初步放行 /admin/ 下的所有测试接口
-     * @param http
-     * @throws Exception
+     * @param http 路由
+     * @throws Exception 异常
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
