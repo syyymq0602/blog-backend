@@ -1,0 +1,6 @@
+description "Blog Project Java Model"
+
+apply plugin: 'java'
+dependencies {
+
+}

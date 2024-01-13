@@ -1,6 +1,7 @@
 package org.kooguy.work;
 
 import lombok.extern.slf4j.Slf4j;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
@@ -13,6 +14,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 @Slf4j
+@MapperScan(value = "org.kooguy.work.**.mapper")
 @SpringBootApplication(scanBasePackages = "org.kooguy.work")
 public class BlogWebRestApplication {
     public static void main(String[] args) throws UnknownHostException {

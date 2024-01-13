@@ -1,0 +1,25 @@
+plugins {
+    id 'java-library'
+}
+
+description "Blog Project ORM"
+
+dependencies {
+    api project(":platform-core")
+    api project(":platform-core-api")
+    //mysql
+    api ('mysql:mysql-connector-java')
+    api ('com.alibaba:druid-spring-boot-starter:1.1.18')
+    //mybatis local date time
+    api group: 'org.mybatis', name: 'mybatis-typehandlers-jsr310', version: '1.0.2'
+    //mybatis plus
+    api group: 'com.baomidou', name: 'mybatis-plus-core', version: '3.5.3.1'
+    api group: 'com.baomidou', name: 'mybatis-plus-extension', version: '3.5.3.1'
+    //template velocity freemarker
+    api group: 'org.apache.velocity', name: 'velocity-engine-core', version: '2.3'
+    api group: 'org.freemarker', name: 'freemarker', version: '2.3.30'
+    //分页支持pageHelper
+    api ('com.github.pagehelper:pagehelper-spring-boot-starter:3.5.3.1')
+    //mybatis plus dynamic datasource
+    api group: 'com.baomidou', name: 'mybatis-plus-boot-starter', version: '3.5.3.1'
+}

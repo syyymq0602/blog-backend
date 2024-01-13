@@ -1,3 +1,8 @@
 rootProject.name = 'blog-backend'
 include 'service-web'
+include 'platform-model'
+include 'platform-core'
+include 'platform-core-api'
+include 'platform-orm'
+include 'service-user-management'
 

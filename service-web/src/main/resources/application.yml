@@ -1,5 +1,30 @@
+server:
+  port: 18080
+  servlet:
+    context-path: /api
+
 spring:
+  application:
+    name: "个人博客项目"
+  datasource:
+    url: jdbc:mysql://kooguy.work:3309/hobby_blog_dev?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: XXX
+    driverClassName: com.mysql.cj.jdbc.Driver
   security:
     user:
       password: 123456
       roles: admin
+
+# MyBatis Plus Log Configuration
+logging:
+  level:
+    com.baomidou.mybatisplus: debug
+
+# MyBatis Plus配置
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+  mapper-locations: classpath:/mapper/*Mapper.xml
+#  typeAliasesPackage: com.example.entity

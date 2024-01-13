@@ -12,19 +12,19 @@ dependencies {
     implementation ('org.springframework.security:spring-security-oauth2-jose')
     implementation ('org.springframework.security:spring-security-config')
     implementation ('org.springframework.security:spring-security-oauth2-resource-server')
-//    implementation group:'org.springframework.security',name:'spring-security-oauth2-client',version:'5.3.9.RELEASE'
+    implementation group:'org.springframework.security',name:'spring-security-oauth2-client',version:'5.5.1.RELEASE'
     //jwt
     implementation ("com.nimbusds:nimbus-jose-jwt")
 
-//    implementation project(path: ':platform-core')
-//    implementation project(path: ':platform-core-api')
-//    implementation project(path: ':platform-model')
-//    implementation project(':platform-orm')
+    implementation project(path: ':platform-core')
+    implementation project(path: ':platform-core-api')
+    implementation project(path: ':platform-model')
+    implementation project(':platform-orm')
 //    implementation project(path: ':service-avas-management')
 //    implementation project(path: ':service-externaldata-management')
 //    implementation project(path: ':service-infrastructure-management')
-//    implementation project(path: ':service-user-management')
-//    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation project(path: ':service-user-management')
+//    implementation ('org.springframework.boot:spring-boot-starter-web')
 //    implementation('org.springframework.boot:spring-boot-devtools')
 //    implementation('org.springframework.boot:spring-boot-starter-actuator')
 

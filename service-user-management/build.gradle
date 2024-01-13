@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+group 'org.kooguy.work'
+version '0.0.1'
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    implementation project(path: ':platform-core')
+    implementation project(path: ':platform-core-api')
+    implementation project(path: ':platform-model')
+    implementation project(path: ':platform-orm')
+//    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

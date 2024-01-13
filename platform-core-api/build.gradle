@@ -1,0 +1,5 @@
+description "Blog Project  Platform Core Api"
+
+dependencies{
+    implementation project(":platform-model")
+}
